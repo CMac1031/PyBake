@@ -1,10 +1,13 @@
 import random
+import pandas as pd
+import glob
 
 def main():
     ## hello world
     print("hello world")
     challege1()
     challenge2()
+    challege3()
     
 def challege1():
     ##Challenge 1 -affirmation
@@ -18,7 +21,6 @@ def challenge2():
     with open('Level1Challenges/Challenge2.txt', encoding='utf8') as f:
         data = f.read()
     length = len(data)
-    challege_2_count_part_1 = 0
     check1 = "Don Quixote"
     count1 = data.count(check1)
     count2 = data.count("DON QUIXOTE")
@@ -36,5 +38,11 @@ def challenge2():
             "Sum of counts is " + sumStr)
     
 def challege3():
-    
+    #count of HADOOP, SWIRLIX, and WATERLOO
+    csv_files = glob.glob('Level1Challenges/Challenge3Expenses/*.csv')
+    combined_dataFrame = pd.DataFrame()
+    for csv_file in csv_files:
+        df = pd.read_csv(csv_file)
+        combined_df = pd.concat([combined_df, df])
+    print(combined_df)
 main()
